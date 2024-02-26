@@ -1,8 +1,14 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
+import LeftPanel from "@/components/LeftPanel";
+import { ClerkProvider } from '@clerk/nextjs'
 
-const inter = Inter({ subsets: ["latin"] });
+
+const ibm = IBM_Plex_Sans({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,8 +21,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <ClerkProvider>
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={ibm.className}>
+        <div className="w-full flex">
+          <LeftPanel />
+          <main className="grow bg-slate-50 px-12 py-9 overflow-y-scroll">{children}</main>
+        </div>
+      </body>
     </html>
+    </ClerkProvider>
   );
 }
