@@ -2,7 +2,6 @@
 
 import { CldUploadWidget } from "next-cloudinary";
 import type CldUploadWidgetInfo from "next-cloudinary";
-import ImageView from "@/components/ImageView";
 import AddImage from "/public/icons/add.svg";
 import Image from "next/image";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
@@ -36,7 +35,7 @@ const ImageLoad = ({
           return (
             <div
               onClick={() => open()}
-              className="min-h-80 flex flex-col w-full h-full justify-center items-center gap-3 cursor-pointer"
+              className="flex flex-col w-full h-full justify-center items-center gap-3 cursor-pointer"
             >
               <span className="p-5 border shadow rounded-xl">
                 <Image src={AddImage} width={24} height={24} alt="add" />

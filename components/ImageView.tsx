@@ -3,7 +3,15 @@ import { CldImage } from "next-cloudinary";
 import { PlaceholderValue } from "next/dist/shared/lib/get-img-props";
 import type { Transformations } from "@/types/type";
 
-const ImageView = ({ id, prompt }: { prompt?: Transformations; id: string }) => {
+export const dynamic = "force-dynamic";
+
+const ImageView = ({
+  id,
+  transformation,
+}: {
+  transformation?: Transformations;
+  id: string;
+}) => {
   const shimmer = (w: number, h: number) => `
   <svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <text x="150" y="125" font-size="60" text-anchor="middle" fill="white">SVG</text>
@@ -27,16 +35,20 @@ const ImageView = ({ id, prompt }: { prompt?: Transformations; id: string }) => 
 
   const dataUrl = `data:image/svg+xml;base64,${toBase64(shimmer(900, 600))}`;
   return (
-    <div className="w-full h-full relative">
-      <CldImage
-        className="object-cover absolute top-0 left-0"
-        src={id}
-        fill
-        alt="image"
-        {...prompt}
-        placeholder={dataUrl as PlaceholderValue}
-      />
-    </div>
+    <CldImage
+      className="object-content"
+      src={id}
+      width={1000}
+      height={1000}
+      style={{
+        width: "100%",
+        height: "auto",
+      }}
+      sizes="100vw"
+      alt="image"
+      {...transformation}
+      placeholder={dataUrl as PlaceholderValue}
+    />
   );
 };
 

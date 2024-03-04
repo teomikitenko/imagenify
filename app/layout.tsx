@@ -26,7 +26,7 @@ export default function RootLayout({
       <body className={ibm.className}>
         <div className="w-full flex">
           <LeftPanel />
-          <main className="grow bg-slate-50 px-12 py-9 overflow-y-scroll">{children}</main>
+          <main className="grow w-[70%] bg-slate-50 px-12 py-9 ">{children}</main>
         </div>
       </body>
     </html>

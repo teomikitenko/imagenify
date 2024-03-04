@@ -19,37 +19,64 @@ import type { Transformations } from "@/types/type";
 import { save } from "@/app/action";
 import { useUser } from "@clerk/nextjs";
 import { getCldImageUrl } from "next-cloudinary";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
+type TransformationData = {
+  transformProps: Transformations;
+  prompt: string;
+  color?: string;
+};
 
-const TransformedForm = ({ type }: { type?: string }) => {
+const TransformedForm = ({ type }: { type: keyof Transformations }) => {
   const [id, setid] = useState<string | undefined>(undefined);
-  const [prompt, setPrompt] = useState<Transformations>({});
+  const [transformation, setTransformation] = useState<TransformationData>();
   const [active, setActive] = useState(true);
   const [apply, setApply] = useState(false);
   const { user } = useUser();
 
-
-  const createUrl = () => {
-    return getCldImageUrl({
-      width: 960,
-      height: 600,
-      src: id as string,
-      ...prompt,
-    });
+  const createUrl = (transformationData?: TransformationData) => {
+    if (transformationData) {
+      const { transformProps } = transformationData as TransformationData;
+      return getCldImageUrl({
+        width: 1000,
+        height: 1000,
+        src: id as string,
+        ...transformProps,
+        rawTransformations: [`fl_attachment:${form.getValues("title")}`],
+        format: "jpg",
+      });
+    } else {
+      return getCldImageUrl({
+        width: 1000,
+        height: 1000,
+        src: id as string,
+      });
+    }
   };
-  useEffect(() => {
-    if (type) setPrompt({ restore: true });
-  }, []);
 
   const formSchema = z.object({
     title: z.string().min(2, {
       message: "Title must be at least 2 characters.",
     }),
+    ratio: z.string(),
+    objectRemove: z.string(),
+    objectToRecolore: z.string(),
+    replacementColor: z.string(),
   });
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: "",
+      ratio: "Select size",
+      objectRemove: "",
+      objectToRecolore: "",
+      replacementColor: "",
     },
   });
 
@@ -57,16 +84,62 @@ const TransformedForm = ({ type }: { type?: string }) => {
     const transformData = {
       title: data.title,
       creater: user?.fullName,
-      prompt: prompt,
-      url: createUrl(),
+      transformation: transformation?.transformProps,
+      color: transformation?.color,
+      prompt: transformation?.prompt,
+      originalUrl: createUrl(),
+      transformationUrl: createUrl(transformation!),
     };
+
     save(transformData).then(() => {
       setActive(true);
       setApply(false);
       setid(undefined);
-      setPrompt({});
-      form.reset()
+      setTransformation(undefined);
+      form.reset();
     });
+  };
+  useEffect(() => {
+    if (apply) constructPrompt();
+  }, [apply]);
+  const constructPrompt = () => {
+    if (type === "aspectRatio")
+      setTransformation({
+        transformProps: {
+          aspectRatio: form.getValues("ratio"),
+          crop: "fill",
+        },
+        prompt: form.getValues("ratio"),
+      });
+
+    if (type === "restore")
+      setTransformation({
+        transformProps: { restore: true },
+        prompt: "restore",
+      });
+    if (type === "recolor")
+      setTransformation({
+        transformProps: {
+          recolor: {
+            prompt: form.getValues("objectToRecolore"),
+            to: form.getValues("replacementColor"),
+            multiple: true,
+          },
+        },
+        prompt: form.getValues("objectToRecolore"),
+        color: form.getValues("replacementColor"),
+      });
+    if (type === "remove")
+      setTransformation({
+        transformProps: {
+          remove: {
+            prompt: form.getValues("objectRemove"),
+            multiple: true,
+            removeShadow: true,
+          },
+        },
+        prompt: form.getValues("objectRemove"),
+      });
   };
   return (
     <Form {...form}>
@@ -84,14 +157,79 @@ const TransformedForm = ({ type }: { type?: string }) => {
             </FormItem>
           )}
         />
+        {type === "recolor" && (
+          <div className="flex w-full gap-4">
+            <FormField
+              control={form.control}
+              name="objectToRecolore"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel>Object to recolor</FormLabel>
+                  <FormControl>
+                    <Input className="rounded-2xl p-7" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="replacementColor"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel>Replacement Color</FormLabel>
+                  <FormControl>
+                    <Input className="rounded-2xl p-7" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+        )}
+
+        {type === "aspectRatio" && (
+          <FormField
+            control={form.control}
+            name="ratio"
+            render={({ field }) => (
+              <Select onValueChange={field.onChange}>
+                <SelectTrigger className="w-full rounded-2xl p-7">
+                  <SelectValue placeholder="Select size" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="1:1">Square(1:1)</SelectItem>
+                  <SelectItem value="3:4">Standard Portrait (3:4)</SelectItem>
+                  <SelectItem value="9:16">Phone Portrait (9:16)</SelectItem>
+                  <SelectItem value="16:9">Phone Landscape (16:9)</SelectItem>
+                </SelectContent>
+              </Select>
+            )}
+          />
+        )}
+        {type === "remove" && (
+          <FormField
+            control={form.control}
+            name="objectRemove"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Object to Remove</FormLabel>
+                <FormControl>
+                  <Input className="rounded-2xl p-7" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        )}
         <div className="flex w-full gap-4">
           <div className="w-full flex flex-col gap-3">
             <h1 className="text-3xl font-extrabold text-blue-950">Original</h1>
-            <div className="min-h-80 border-gray-200 rounded-2xl border  ">
+            <div className="min-h-80 h-fit relative border-gray-200 rounded-2xl border  ">
               {!id ? (
                 <ImageLoad setId={setid} setActive={setActive} />
               ) : (
-                <ImageView id={id as string} />
+                <ImageView key={"original"} id={id as string} />
               )}
             </div>
           </div>
@@ -99,9 +237,13 @@ const TransformedForm = ({ type }: { type?: string }) => {
             <h1 className="text-3xl font-extrabold text-blue-950">
               Transformed
             </h1>
-            <div className="min-h-80 border-gray-200 rounded-2xl border ">
+            <div className="relative min-h-80 h-fit border-gray-200 rounded-2xl border ">
               {id && apply ? (
-                <ImageView id={id as string} prompt={prompt} />
+                <ImageView
+                  key={transformation?.prompt}
+                  id={id as string}
+                  transformation={transformation?.transformProps!}
+                />
               ) : (
                 <div className="flex h-full w-full justify-center items-center ">
                   <p className="text-slate-500 text-sm font-medium">
@@ -124,7 +266,12 @@ const TransformedForm = ({ type }: { type?: string }) => {
               Apply transformation
             </p>
           </Button>
-          <Button variant="gradient" size="custom" type="submit">
+          <Button
+            variant="gradient"
+            disabled={!Boolean(transformation)}
+            size="custom"
+            type="submit"
+          >
             <p className="text-slate-50 font-semibold text-base">Save Image</p>
           </Button>
         </div>

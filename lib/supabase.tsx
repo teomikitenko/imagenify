@@ -16,9 +16,19 @@ export const addData = async (transformData:TransformData) => {
     .select();
 };
 
-export const takeData = async () => {
+export const getAllTransformations = async () => {
   let { data: transformations, error } = await supabase
     .from("transformations")
     .select("*");
   return transformations;
 };
+export const getTransformationData = async (id:string)=>{
+  const { data, error } = await supabase
+  .from('transformations')
+  .select()
+  .eq('id', id)
+  .select()
+  return data
+}
+
+

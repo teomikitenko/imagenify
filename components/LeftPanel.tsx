@@ -20,16 +20,16 @@ const LeftPanel = () => {
   ];
 
   return (
-    <div className="pl-8 pr-12 bg-slate-50 border relative ">
-       <div className=" w-max py-3 h-[100vh] sticky top-0" >
+    <div className="pl-8 grow bg-slate-50 border relative ">
+       <div className=" w-full py-3 h-[100vh] sticky top-0" >
        <p className="mt-4 mb-6 text-black">Image</p>
-      <div className="flex h-full flex-col gap-20">
+      <div className="flex h-full w-[90%] flex-col gap-20">
         <SignedIn>
-        <ul className="flex flex-col h-full gap-9">
+        <ul className="flex flex-col h-full">
           {links.map((l) => (
             <li key={l.title}>
               <Link href={l.href}>
-                <div className="flex gap-3">
+                <div className="flex gap-3 py-4 hover:shadow-sm hover:bg-slate-100 rounded-2xl pl-2">
                   <Image src={l.img} height={24} width={24} alt="link-image" />
                   <p className="text-slate-700 font-semibold">{l.title}</p>
                 </div>
@@ -57,7 +57,7 @@ const LeftPanel = () => {
         </SignedIn>
         <SignedOut>
           <SignInButton>
-          <div className="px-14 rounded-2xl py-2 text-slate-100 cursor-pointer bg-purple-gradient font-semibold">Login</div>
+          <div className="px-14 flex justify-center items-center rounded-2xl py-2 text-slate-100 cursor-pointer bg-purple-gradient font-semibold">Login</div>
           </SignInButton>
         </SignedOut>
       </div>

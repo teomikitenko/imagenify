@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @layer utilities {
-  .bg-purple-gradient {
+  .bg-purple-gradient{
     background-image: url("../public/images/gradient-bg.svg");
     background-position: center;
     background-repeat: no-repeat;
@@ -19,4 +19,5 @@
 }
 body {
   overflow-y: scroll !important;
+  min-height: 100vh;
 }
