@@ -4,7 +4,7 @@ import Pic from "@/public/icons/image.svg";
 import Stars from "@/public/icons/stars.svg";
 import Scan from "@/public/icons/scan.svg";
 import Filter from "@/public/icons/filter.svg";
-import Camera from "@/public/icons/camera.svg";
+import Logo from "@/public/images/logo-text.svg";
 import Profile from "@/public/icons/profile.svg";
 import Image from "next/image";
 import Link from "next/link";
@@ -21,8 +21,8 @@ const LeftPanel = () => {
 
   return (
     <div className="pl-8 grow bg-slate-50 border relative ">
-       <div className=" w-full py-3 h-[100vh] sticky top-0" >
-       <p className="mt-4 mb-6 text-black">Image</p>
+       <div className=" w-full py-5 h-[100vh] sticky top-0 flex flex-col gap-4" >
+      <Image  src={Logo} width={180} height={40} alt="logo"/>
       <div className="flex h-full w-[90%] flex-col gap-20">
         <SignedIn>
         <ul className="flex flex-col h-full">
@@ -37,7 +37,7 @@ const LeftPanel = () => {
             </li>
           ))}
         </ul>
-        <ul className="flex flex-col h-full gap-6">
+        <ul className="flex flex-col h-full justify-end gap-6">
           <li>
             <Link href={'/profile'}>
             <div className="flex  w-full gap-3">
