@@ -4,11 +4,9 @@ import Scan from "@/public/icons/scan.svg";
 import Filter from "@/public/icons/filter.svg";
 import Image from "next/image";
 import RescentEdits from "@/components/RescentEdits";
-import { getAllTransformations } from "@/lib/supabase";
 import Link from "next/link";
 
 export default async function Home() {
-  const images = await getAllTransformations();
   const iconsLink = [
     {
       title: "Image Restore",
@@ -53,7 +51,7 @@ export default async function Home() {
           ))}
         </div>
       </div>
-      <RescentEdits images={images!} />
+      <RescentEdits/>
     </div>
   );
 }

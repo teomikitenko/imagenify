@@ -1,5 +1,6 @@
-import React from "react";
 import TransformedForm from "@/components/TransformedForm";
+
+
 
 export const Recolor = () => {
   return (

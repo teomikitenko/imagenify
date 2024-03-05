@@ -30,5 +30,12 @@ export const getTransformationData = async (id:string)=>{
   .select()
   return data
 }
-
+export const getDataByCreater = async (creater:string)=>{
+  const { data, error } = await supabase
+  .from('transformations')
+  .select()
+  .eq('creater', creater)
+  .select()
+  return data
+}
 
