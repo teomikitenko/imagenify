@@ -33,7 +33,7 @@ const ImagesGallery = ({ images }: { images: ImagesType[] }) => {
               </CardContent>
               <CardFooter>
                 <div className="flex w-full justify-between">
-                  <p className="text-xl font-bold text-blue-800 truncate">
+                  <p className="text-xl font-bold text-blue-800 truncate dark:text-slate-100">
                     {i.title}
                   </p>
                   <Image

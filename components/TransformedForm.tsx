@@ -15,7 +15,7 @@ import { Input } from "./ui/input";
 import { z } from "zod";
 import ImageLoad from "./ImageLoad";
 import ImageView from "./ImageView";
-import type { Transformations } from "@/types/type";
+import type { Transformations, TransformationData } from "@/types/type";
 import { save } from "@/app/action";
 import { useUser } from "@clerk/nextjs";
 import { getCldImageUrl } from "next-cloudinary";
@@ -26,12 +26,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-
-type TransformationData = {
-  transformProps: Transformations;
-  prompt: string;
-  color?: string;
-};
+import clsx from "clsx";
 
 const TransformedForm = ({ type }: { type: keyof Transformations }) => {
   const [id, setid] = useState<string | undefined>(undefined);
@@ -40,6 +35,14 @@ const TransformedForm = ({ type }: { type: keyof Transformations }) => {
   const [apply, setApply] = useState(false);
   const { user } = useUser();
 
+  const borderOriginal = clsx({
+    "dark:border-gray-900 border-gray-50": active,
+    "border-transparent": !active,
+  });
+  const borderTransformed = clsx({
+    "dark:border-gray-900 border-gray-50": !apply,
+    "border-transparent": apply,
+  });
   const createUrl = (transformationData?: TransformationData) => {
     if (transformationData) {
       const { transformProps } = transformationData as TransformationData;
@@ -224,8 +227,12 @@ const TransformedForm = ({ type }: { type: keyof Transformations }) => {
         )}
         <div className="flex w-full gap-4">
           <div className="w-full flex flex-col gap-3">
-            <h1 className="text-3xl font-extrabold text-blue-950">Original</h1>
-            <div className="min-h-80 h-fit relative border-gray-200 rounded-2xl border  ">
+            <h1 className="text-3xl font-extrabold text-blue-950 dark:text-slate-400">
+              Original
+            </h1>
+            <div
+              className={`min-h-80 h-fit relative rounded-2xl border ${borderOriginal}`}
+            >
               {!id ? (
                 <ImageLoad setId={setid} setActive={setActive} />
               ) : (
@@ -234,10 +241,12 @@ const TransformedForm = ({ type }: { type: keyof Transformations }) => {
             </div>
           </div>
           <div className="w-full flex flex-col gap-3">
-            <h1 className="text-3xl font-extrabold text-blue-950">
+            <h1 className="text-3xl font-extrabold text-blue-950 dark:text-slate-400">
               Transformed
             </h1>
-            <div className="relative min-h-80 h-fit border-gray-200 rounded-2xl border ">
+            <div
+              className={`relative min-h-80 h-fit ${borderTransformed} rounded-2xl border`}
+            >
               {id && apply ? (
                 <ImageView
                   key={transformation?.prompt}

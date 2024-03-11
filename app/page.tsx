@@ -5,8 +5,14 @@ import Filter from "@/public/icons/filter.svg";
 import Image from "next/image";
 import RescentEdits from "@/components/RescentEdits";
 import Link from "next/link";
+import { getCountPages } from "@/lib/supabase";
 
-export default async function Home() {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: { page: string; search: string };
+}) {
+  const countPages = await getCountPages();
   const iconsLink = [
     {
       title: "Image Restore",
@@ -51,7 +57,11 @@ export default async function Home() {
           ))}
         </div>
       </div>
-      <RescentEdits/>
+      <RescentEdits
+        count={Math.ceil(countPages! / 6)}
+        page={searchParams.page}
+        search={searchParams.search}
+      />
     </div>
   );
 }

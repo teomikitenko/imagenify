@@ -1,5 +1,15 @@
-import { Json } from "./supabase";
+import { Dispatch, SetStateAction } from "react";
 import type { Database } from "./supabase";
+
+export type ThemeObject = {
+  theme: string;
+  setTheme: Dispatch<SetStateAction<string>>;
+};
+export type TransformationData = {
+  transformProps: Transformations;
+  prompt: string;
+  color?: string;
+};
 
 export type Transformations = {
     restore?: boolean;

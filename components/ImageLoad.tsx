@@ -37,7 +37,7 @@ const ImageLoad = ({
               onClick={() => open()}
               className="flex flex-col w-full h-full justify-center items-center gap-3 cursor-pointer"
             >
-              <span className="p-5 border shadow rounded-xl">
+              <span className="p-5 border shadow rounded-xl dark:border-gray-900">
                 <Image src={AddImage} width={24} height={24} alt="add" />
               </span>
               <p className="text-slate-500 text-sm font-medium">
