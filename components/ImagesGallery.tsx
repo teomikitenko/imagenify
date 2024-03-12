@@ -17,8 +17,10 @@ const ImagesGallery = ({ images }: { images: ImagesType[] }) => {
   return (
     <div className="grid grid-cols-3 gap-5">
       {images?.map((i) => {
-        const prom = Object.keys(i.transformation!)
-        const typePrompt: string[] =  prom.filter((t)=>Object.keys(pic).find(p=>t === p)); 
+        const prom = Object.keys(i.transformation!);
+        const typePrompt: string[] = prom.filter((t) =>
+          Object.keys(pic).find((p) => t === p)
+        );
         return (
           <Link key={i.id} href={`/transformations/${i.id}`}>
             <Card>

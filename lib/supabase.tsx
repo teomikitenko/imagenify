@@ -15,22 +15,25 @@ export const addData = async (transformData: TransformData) => {
     .insert(transformData)
     .select();
 };
-export const getCountPages = async (search?:string) => {
-  const { count, error } = await supabase
+export const getCountPages = async () => {
+  const { count } = await supabase
     .from("transformations")
-    /* .ilike('title',`%${search? search:''}%`) */    // need give actual count info if i use search param
     .select("*", { count: "exact", head: true });
   return count;
 };
 
-/* export const getCountByName = async () => {
-  const { count, error } = await supabase
+export const getSearchCountPages = async (search?: string) => {
+  const { data } = await supabase
     .from("transformations")
-    .select("*", { count: "exact", head: true });
-  return count;
-}; */
-
-export const getAllTransformations = async (obj:{page?: string,search?:string}) => {
+    .select("*")
+    .ilike("title", `%${search ? search : ""}%`)
+    .select("*");
+  return data?.length;
+};
+export const getAllTransformations = async (obj: {
+  page?: string;
+  search?: string;
+}) => {
   const from = obj.page
     ? obj.page === "1"
       ? Number(obj.page) * 5 - 5
@@ -44,7 +47,7 @@ export const getAllTransformations = async (obj:{page?: string,search?:string}) 
   let { data: transformations, error } = await supabase
     .from("transformations")
     .select("*")
-    .ilike('title',`%${obj.search? obj.search:''}%`)
+    .ilike("title", `%${obj.search ? obj.search : ""}%`)
     .range(from, to)
     .select("*");
   return transformations;
