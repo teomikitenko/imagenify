@@ -6,6 +6,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import ThemeProvider from "@/components/Themes/ThemeProvider";
 import { cookies } from "next/headers";
 import clsx from "clsx";
+import TopPanel from "@/components/TopPanel";
 
 const ibm = IBM_Plex_Sans({
   subsets: ["latin"],
@@ -24,21 +25,24 @@ export default function RootLayout({
 }>) {
   const theme = cookies().get("theme")?.value;
   const curentStyle = clsx({
-    "light": theme === "light",
-    "dark": theme === "dark",
+    light: theme === "light",
+    dark: theme === "dark",
   });
   return (
     <ClerkProvider>
-      <ThemeProvider currentTheme={theme!}> 
-      <html lang="en" className={curentStyle}>
-        <body className={ibm.className}>
-          <div className="w-full flex ">
-            <LeftPanel />
-            <main className="w-full dark:bg-slate-800 px-12 py-9">{children}</main>
-          </div>
-        </body>
-      </html>
-       </ThemeProvider> 
+      <ThemeProvider currentTheme={theme!}>
+        <html lang="en" className={curentStyle}>
+          <body className={ibm.className}>
+            <div className="w-full flex flex-col lg:flex-row relative">
+              <TopPanel />
+              <LeftPanel />
+              <main className="w-full dark:bg-slate-800 px-12 py-9">
+                {children}
+              </main>
+            </div>
+          </body>
+        </html>
+      </ThemeProvider>
     </ClerkProvider>
   );
 }

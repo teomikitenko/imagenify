@@ -10,7 +10,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { SignedIn, SignedOut, UserButton, SignInButton } from "@clerk/nextjs";
 import ThemeSwitcher from "./ThemeSwitcher";
-import clsx from "clsx";
 const LeftPanel = () => {
   const links = [
     { title: "Home", href: "/", img: Home },
@@ -19,14 +18,12 @@ const LeftPanel = () => {
     { title: "Object Remove", href: "/remove", img: Scan },
     { title: "Object Recolor", href: "/recolor", img: Filter },
   ];
-
-
   return (
-    <div className="pl-8 w-[30%] border relative dark:bg-slate-800 dark:border-slate-800">
+    <div className="lg:block hidden  pl-8 w-[30%] border relative dark:bg-slate-800 dark:border-slate-800">
       <div className=" w-full py-5 h-[100vh] sticky top-0 flex flex-col gap-4">
         <div className="flex w-[90%] gap-4">
           <Image src={Logo} width={180} height={40} alt="logo" />
-         <ThemeSwitcher/>
+          <ThemeSwitcher />
         </div>
         <div className="flex h-full w-[90%] flex-col gap-20">
           <SignedIn>
@@ -41,7 +38,9 @@ const LeftPanel = () => {
                         width={24}
                         alt="link-image"
                       />
-                      <p className="font-semibold dark:text-slate-100">{l.title}</p>
+                      <p className="font-semibold dark:text-slate-100">
+                        {l.title}
+                      </p>
                     </div>
                   </Link>
                 </li>
@@ -57,7 +56,9 @@ const LeftPanel = () => {
                       width={24}
                       alt="link-image"
                     />
-                    <p className="text-slate-700 dark:text-slate-100 font-semibold">Profile</p>
+                    <p className="text-slate-700 dark:text-slate-100 font-semibold">
+                      Profile
+                    </p>
                   </div>
                 </Link>
               </li>

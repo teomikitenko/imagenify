@@ -38,7 +38,7 @@ export default async function Home({
     },
   ];
   return (
-    <div className="flex flex-col gap-16 min-h-[100vh]">
+    <div className="flex flex-col pt-11 lg:pt-0 gap-16 min-h-[100vh]">
       <div className="bg-banner w-full flex flex-col rounded-xl py-10 px-12 gap-5 justify-center items-center">
         <div className="flex flex-col gap-3">
           <h1 className="font-extrabold	text-4xl text-slate-50">

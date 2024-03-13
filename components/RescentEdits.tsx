@@ -1,4 +1,3 @@
-import { Input } from "./ui/input";
 import SearchIcon from "@/public/icons/search.svg";
 import Image from "next/image";
 import ImagesGalleryWrapper from "./ImagesGalleryWrapper";
