@@ -39,14 +39,14 @@ export default async function Home({
   ];
   return (
     <div className="flex flex-col pt-11 lg:pt-0 gap-16 min-h-[100vh]">
-      <div className="bg-banner w-full flex flex-col rounded-xl py-10 px-12 gap-5 justify-center items-center">
+      <div className="bg-banner w-full sm:flex flex-col rounded-xl py-10 hidden gap-5 justify-center items-center">
         <div className="flex flex-col gap-3">
-          <h1 className="font-extrabold	text-4xl text-slate-50">
+          <h1 className="font-extrabold	text-5xl text-slate-50">
             Your AI magic artist
           </h1>
-          <h1 className="font-extrabold	text-4xl">who never gets tired!</h1>
+          <h1 className="font-extrabold	text-5xl">who never gets tired!</h1>
         </div>
-        <div className="flex justify-between w-full px-48">
+        <div className="flex justify-between w-full px-28">
           {iconsLink.map((i) => (
             <Link key={i.title} href={i.page}>
               <div className="flex flex-col gap-2 items-center">

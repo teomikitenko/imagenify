@@ -1,7 +1,9 @@
 "use client";
 import { createContext, useState, useEffect } from "react";
 import { ThemeObject } from "@/types/type";
-import clsx from "clsx";
+import { ClerkProvider } from "@clerk/nextjs";
+import { dark } from "@clerk/themes";
+
 
 export const ThemeContext = createContext<ThemeObject | undefined>(undefined);
 
@@ -13,30 +15,30 @@ const ThemeProvider = ({
   currentTheme: string;
 }) => {
   const [theme, setTheme] = useState(currentTheme);
-  const curentStyle = clsx({
-    "dark": theme === "dark",
-    "light": theme === "light",
-  });
-
   useEffect(() => {
     if (theme) {
-     document.cookie = `theme=${theme};max-age=3600`;
+      document.cookie = `theme=${theme};max-age=3600`;
       const html = document.querySelector("html");
-      html?.classList.remove('dark','light');
-      html?.classList.add(curentStyle)
-
+      html?.classList.remove("dark", "light");
+      html?.classList.add(theme);
     }
   }, [theme]);
 
   return (
-    <ThemeContext.Provider
-      value={{
-        theme,
-        setTheme,
+    <ClerkProvider
+      appearance={{
+        baseTheme: theme === "dark" ? dark : undefined,
       }}
     >
-      {children}
-    </ThemeContext.Provider>
+      <ThemeContext.Provider
+        value={{
+          theme,
+          setTheme,
+        }}
+      >
+        {children}
+      </ThemeContext.Provider>
+    </ClerkProvider>
   );
 };
 

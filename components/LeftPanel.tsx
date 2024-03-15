@@ -1,4 +1,3 @@
-import React from "react";
 import Home from "@/public/icons/home.svg";
 import Pic from "@/public/icons/image.svg";
 import Stars from "@/public/icons/stars.svg";
@@ -21,7 +20,7 @@ const LeftPanel = () => {
   return (
     <div className="lg:block hidden  pl-8 w-[30%] border relative dark:bg-slate-800 dark:border-slate-800">
       <div className=" w-full py-5 h-[100vh] sticky top-0 flex flex-col gap-4">
-        <div className="flex w-[90%] gap-4">
+        <div className="flex w-[100%] pr-2 justify-between lg:min-w-[220px]">
           <Image src={Logo} width={180} height={40} alt="logo" />
           <ThemeSwitcher />
         </div>

@@ -76,7 +76,7 @@ const Transformation = async ({ params }: { params: { id: string } }) => {
     }
   };
   return (
-    <div className="flex flex-col gap-11">
+    <div className="flex pt-11 lg:pt-0 flex-col gap-11">
       <div className="flex flex-col gap-3">
         <h1 className="text-4xl font-extrabold text-blue-950 mb-3 dark:text-slate-400">
           {transformation![0].title}

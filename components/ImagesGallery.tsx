@@ -15,7 +15,7 @@ const ImagesGallery = ({ images }: { images: ImagesType[] }) => {
     recolor: Filter,
   };
   return (
-    <div className="grid grid-cols-3 gap-5">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-rows-3 xl:grid-cols-3 gap-5">
       {images?.map((i) => {
         const prom = Object.keys(i.transformation!);
         const typePrompt: string[] = prom.filter((t) =>
@@ -25,13 +25,15 @@ const ImagesGallery = ({ images }: { images: ImagesType[] }) => {
           <Link key={i.id} href={`/transformations/${i.id}`}>
             <Card>
               <CardContent>
-                <Image
-                  src={i.transformationUrl!}
-                  height={500}
-                  width={500}
-                  className="h-56"
-                  alt="image-gallery"
-                />
+                <div className="w-full">
+                  <Image
+                    src={i.transformationUrl!}
+                    height={500}
+                    width={500}
+                    className="h-56 object-cover w-full"
+                    alt="image-gallery"
+                  />
+                </div>
               </CardContent>
               <CardFooter>
                 <div className="flex w-full justify-between">

@@ -3,24 +3,24 @@ import Logo from "@/public/images/logo-text.svg";
 import Image from "next/image";
 import BurgerMenuIcon from "@/public/icons/menu.svg";
 import { SignedIn, UserButton } from "@clerk/nextjs";
-import { Context, useState } from "react";
+import { useState } from "react";
 import BurgerMenu from "./BurgerMenu";
 import { createPortal } from "react-dom";
-import { useContext } from "react";
-import { ThemeContext } from "./Themes/ThemeProvider";
-import { ThemeObject } from "@/types/type";
-import clsx from "clsx";
+import ThemeSwitcher from "./ThemeSwitcher";
+import Link from "next/link";
 const TopPanel = () => {
   const [open, setOpen] = useState(false);
-  const {theme} = useContext(ThemeContext as Context<ThemeObject>)
-  const darkTheme = clsx({
-   'bg-slate-800 border-none': theme === 'dark',
-   'bg-slate-50 border-b': theme === 'light'
-  })
   return (
-    <header className={`block lg:hidden w-full fixed top-0 px-8 py-3 ${darkTheme}`}>
+    <header
+      className={`block z-10 lg:hidden w-full fixed top-0 px-8 py-3 bg-slate-50 border-b dark:bg-slate-800 dark:border-none `}
+    >
       <div className="flex w-full justify-between">
-        <Image src={Logo} width={180} height={40} alt="logo" />
+        <div className="flex gap-3">
+          <Link href={"/"}>
+            <Image src={Logo} width={180} height={40} alt="logo" />
+          </Link>
+          <ThemeSwitcher />
+        </div>
         <div className="flex gap-2">
           <SignedIn>
             <UserButton />

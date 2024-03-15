@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
 import LeftPanel from "@/components/LeftPanel";
-import { ClerkProvider } from "@clerk/nextjs";
 import ThemeProvider from "@/components/Themes/ThemeProvider";
 import { cookies } from "next/headers";
 import clsx from "clsx";
@@ -24,25 +23,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const theme = cookies().get("theme")?.value;
-  const curentStyle = clsx({
+  const currentStyle = clsx({
     light: theme === "light",
     dark: theme === "dark",
   });
   return (
-    <ClerkProvider>
-      <ThemeProvider currentTheme={theme!}>
-        <html lang="en" className={curentStyle}>
-          <body className={ibm.className}>
-            <div className="w-full flex flex-col lg:flex-row relative">
-              <TopPanel />
-              <LeftPanel />
-              <main className="w-full dark:bg-slate-800 px-12 py-9">
-                {children}
-              </main>
-            </div>
-          </body>
-        </html>
-      </ThemeProvider>
-    </ClerkProvider>
+    <ThemeProvider currentTheme={theme!}>
+      <html lang="en" className={currentStyle}>
+        <body className={ibm.className}>
+          <div className="w-full min-w-[365px] flex flex-col lg:flex-row relative">
+            <TopPanel />
+            <LeftPanel />
+            <main className="w-full dark:bg-slate-800 px-5 md:px-9 py-9">
+              {children}
+            </main>
+          </div>
+        </body>
+      </html>
+    </ThemeProvider>
   );
 }

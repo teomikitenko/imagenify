@@ -22,7 +22,7 @@ const SearchInput = () => {
       value={value}
       onChange={(e) => setValue(e.currentTarget.value)}
       placeholder="Search"
-      className="grow py-6 border-none text-base"
+      className="grow py-6 border-none text-base "
     />
   );
 };
