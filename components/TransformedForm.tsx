@@ -36,11 +36,11 @@ const TransformedForm = ({ type }: { type: keyof Transformations }) => {
   const { user } = useUser();
 
   const borderOriginal = clsx({
-    "dark:border-gray-900 border-gray-50": active,
+    "dark:border-gray-900 dark:border-gray-600": active,
     "border-transparent": !active,
   });
   const borderTransformed = clsx({
-    "dark:border-gray-900 border-gray-50": !apply,
+    "dark:border-gray-900 dark:border-gray-600": !apply,
     "border-transparent": apply,
   });
   const createUrl = (transformationData?: TransformationData) => {
@@ -71,6 +71,8 @@ const TransformedForm = ({ type }: { type: keyof Transformations }) => {
     objectRemove: z.string(),
     objectToRecolore: z.string(),
     replacementColor: z.string(),
+    objectToReplace: z.string(),
+    replacementObject: z.string(),
   });
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -80,6 +82,8 @@ const TransformedForm = ({ type }: { type: keyof Transformations }) => {
       objectRemove: "",
       objectToRecolore: "",
       replacementColor: "",
+      objectToReplace: "",
+      replacementObject: "",
     },
   });
 
@@ -106,6 +110,19 @@ const TransformedForm = ({ type }: { type: keyof Transformations }) => {
     if (apply) constructPrompt();
   }, [apply]);
   const constructPrompt = () => {
+    if (type === "replace") {
+      setTransformation({
+        transformProps: {
+          replace: {
+            from: form.getValues("objectToReplace"),
+            to: form.getValues("replacementObject"),
+            preserveGeometry: true,
+          },
+        },
+        prompt: form.getValues("objectToReplace"),
+        replacement: form.getValues("replacementObject"),
+      });
+    }
     if (type === "aspectRatio")
       setTransformation({
         transformProps: {
@@ -161,7 +178,7 @@ const TransformedForm = ({ type }: { type: keyof Transformations }) => {
           )}
         />
         {type === "recolor" && (
-          <div className="flex w-full gap-4">
+          <div className="flex flex-col sm:flex-row w-full gap-4">
             <FormField
               control={form.control}
               name="objectToRecolore"
@@ -190,7 +207,36 @@ const TransformedForm = ({ type }: { type: keyof Transformations }) => {
             />
           </div>
         )}
-
+        {type === "replace" && (
+          <div className="flex flex-col sm:flex-row w-full gap-4">
+            <FormField
+              control={form.control}
+              name="objectToReplace"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel>Object to replace</FormLabel>
+                  <FormControl>
+                    <Input className="rounded-2xl p-7" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="replacementObject"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel>Replacement Object</FormLabel>
+                  <FormControl>
+                    <Input className="rounded-2xl p-7" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+        )}
         {type === "aspectRatio" && (
           <FormField
             control={form.control}
@@ -225,9 +271,9 @@ const TransformedForm = ({ type }: { type: keyof Transformations }) => {
             )}
           />
         )}
-        <div className="flex w-full gap-4">
+        <div className="flex flex-col md:flex-row w-full gap-4">
           <div className="w-full flex flex-col gap-3">
-            <h1 className="text-3xl font-extrabold text-blue-950 dark:text-slate-400">
+            <h1 className="responsive-text font-extrabold text-blue-950 dark:text-slate-400">
               Original
             </h1>
             <div
@@ -241,7 +287,7 @@ const TransformedForm = ({ type }: { type: keyof Transformations }) => {
             </div>
           </div>
           <div className="w-full flex flex-col gap-3">
-            <h1 className="text-3xl font-extrabold text-blue-950 dark:text-slate-400">
+            <h1 className="responsive-text font-extrabold text-blue-950 dark:text-slate-400">
               Transformed
             </h1>
             <div
@@ -254,7 +300,7 @@ const TransformedForm = ({ type }: { type: keyof Transformations }) => {
                   transformation={transformation?.transformProps!}
                 />
               ) : (
-                <div className="flex h-full w-full justify-center items-center ">
+                <div className="flex h-full min-h-80 w-full justify-center items-center ">
                   <p className="text-slate-500 text-sm font-medium">
                     Transformed Image
                   </p>
@@ -271,7 +317,7 @@ const TransformedForm = ({ type }: { type: keyof Transformations }) => {
             onClick={() => setApply(true)}
             type="button"
           >
-            <p className="text-slate-50 font-semibold text-base">
+            <p className="text-slate-50 font-semibold text-sm md:text-base">
               Apply transformation
             </p>
           </Button>
@@ -281,7 +327,9 @@ const TransformedForm = ({ type }: { type: keyof Transformations }) => {
             size="custom"
             type="submit"
           >
-            <p className="text-slate-50 font-semibold text-base">Save Image</p>
+            <p className="text-slate-50 font-semibold text-sm md:text-base">
+              Save Image
+            </p>
           </Button>
         </div>
       </form>

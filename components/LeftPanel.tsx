@@ -5,6 +5,7 @@ import Scan from "@/public/icons/scan.svg";
 import Filter from "@/public/icons/filter.svg";
 import Logo from "@/public/images/logo-text.svg";
 import Profile from "@/public/icons/profile.svg";
+import Replace from "@/public/icons/replace.svg";
 import Image from "next/image";
 import Link from "next/link";
 import { SignedIn, SignedOut, UserButton, SignInButton } from "@clerk/nextjs";
@@ -16,9 +17,10 @@ const LeftPanel = () => {
     { title: "Generative Fill", href: "/fill", img: Stars },
     { title: "Object Remove", href: "/remove", img: Scan },
     { title: "Object Recolor", href: "/recolor", img: Filter },
+    { title: "Object Replace", href: "/replace", img: Replace }
   ];
   return (
-    <div className="lg:block hidden  pl-8 w-[30%] border relative dark:bg-slate-800 dark:border-slate-800">
+    <div className="lg:block hidden max-w-[330px] pl-8 w-[30%] border relative dark:bg-slate-800 dark:border-slate-800">
       <div className=" w-full py-5 h-[100vh] sticky top-0 flex flex-col gap-4">
         <div className="flex w-[100%] pr-2 justify-between lg:min-w-[220px]">
           <Image src={Logo} width={180} height={40} alt="logo" />

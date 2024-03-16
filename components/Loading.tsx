@@ -15,7 +15,7 @@ export const LoadingImagesGallery = () => {
 export const LoadingProfile = () => {
   return (
     <>
-      <div className="w-1/2 rounded-2xl">
+      <div className="w-full md:w-1/2 rounded-2xl">
         <Skeleton className="h-36 w-full rounded-xl" />
       </div>
       <div className="flex flex-col gap-5">

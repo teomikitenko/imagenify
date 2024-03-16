@@ -20,3 +20,8 @@ body {
   overflow-y: scroll !important;
   min-height: 100vh;
 }
+@layer components{
+  .responsive-text{
+    @apply lg:text-4xl md:text-3xl text-2xl
+  }
+}

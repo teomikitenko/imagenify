@@ -31,10 +31,10 @@ export default function RootLayout({
     <ThemeProvider currentTheme={theme!}>
       <html lang="en" className={currentStyle}>
         <body className={ibm.className}>
-          <div className="w-full min-w-[365px] flex flex-col lg:flex-row relative">
+          <div className="w-full min-w-[365px]  flex flex-col lg:flex-row relative">
             <TopPanel />
             <LeftPanel />
-            <main className="w-full dark:bg-slate-800 px-5 md:px-9 py-9">
+            <main className="w-full dark:bg-slate-800 px-5 md:px-9 py-9 max-w-[1620px] 2xl:m-auto ">
               {children}
             </main>
           </div>

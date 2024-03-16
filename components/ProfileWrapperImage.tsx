@@ -9,7 +9,7 @@ const ProfileWrapperImage = async () => {
   const edit = await getDataByCreater(user?.firstName! + " " + user?.lastName!);
   return (
     <>
-      <div className="w-1/2 border flex flex-col py-7 px-10 rounded-2xl shadow gap-4 dark:border-slate-900">
+      <div className="w-full md:w-1/2 border flex flex-col py-7 px-10 rounded-2xl shadow gap-4 dark:border-slate-900">
         <p className="text-base text-slate-500 font-medium">
           IMAGE MANIPULATION DONE
         </p>

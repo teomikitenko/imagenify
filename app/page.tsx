@@ -46,7 +46,7 @@ export default async function Home({
           </h1>
           <h1 className="font-extrabold	text-5xl">who never gets tired!</h1>
         </div>
-        <div className="flex justify-between w-full px-28">
+        <div className="flex justify-between w-full px-28 2xl:px-52">
           {iconsLink.map((i) => (
             <Link key={i.title} href={i.page}>
               <div className="flex flex-col gap-2 items-center">

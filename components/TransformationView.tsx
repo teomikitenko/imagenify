@@ -9,7 +9,7 @@ const TransformationView = async ({
   transformed: string;
 }) => {
   return (
-    <div className="flex w-full gap-4">
+    <div className="flex flex-col md:flex-row w-full gap-4">
       <div className="w-full flex flex-col gap-3">
         <h1 className="text-3xl font-extrabold text-blue-950 dark:text-slate-400">
           Original
@@ -17,7 +17,7 @@ const TransformationView = async ({
         <div className="min-h-80 h-fit relative rounded-2xl ">
           <Image
             src={original}
-            className="object-content"
+            className="object-cover"
             width={1000}
             height={1000}
             style={{
@@ -35,7 +35,7 @@ const TransformationView = async ({
             Transformed
           </h1>
           <a href={transformed}>
-            <Image src={Download} width={24} height={24} alt="download" />
+            <Image src={Download} width={24} height={24} alt="download"/>
           </a>
         </div>
 

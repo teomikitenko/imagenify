@@ -9,8 +9,8 @@ export type TransformationData = {
   transformProps: Transformations;
   prompt: string;
   color?: string;
+  replacement?:string
 };
-
 export type Transformations = {
     restore?: boolean;
     fillBackground?: boolean;
@@ -24,20 +24,24 @@ export type Transformations = {
       to: string;
       multiple?: boolean;
     };
+    replace?:{
+      from: string,
+      to: string,
+      preserveGeometry:boolean
+    }
     removeBackground?: boolean;
     aspectRatio?:string
     crop?: "fill" | "lfill" | "fill_pad" | "crop" | "thumb" | "scale" | "fit" | "limit" | "mfit" | "pad" | "lpad" | "mpad" | "imagga_scale" | "imagga_crop" | undefined;
   };
-
   export type TransformData={
     title:string,
     creater:string,
     url:string,
     transformation:Transformations,
     prompt:string,
-    color?:string 
+    color?:string,
+    replacement?:string 
   }
-
   export type Prompt = {
     type: keyof Transformations,
     transformations:[string]
@@ -48,4 +52,5 @@ export type Transformations = {
     aspectRatio: any;
     remove: any;
     recolor: any;
+    replace:any
   };

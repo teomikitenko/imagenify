@@ -6,6 +6,7 @@ import Pic from "@/public/icons/image.svg";
 import Stars from "@/public/icons/stars.svg";
 import Scan from "@/public/icons/scan.svg";
 import Filter from "@/public/icons/filter.svg";
+import Replace from "@/public/icons/replace.svg";
 
 const ImagesGallery = ({ images }: { images: ImagesType[] }) => {
   const pic = {
@@ -13,9 +14,10 @@ const ImagesGallery = ({ images }: { images: ImagesType[] }) => {
     aspectRatio: Stars,
     remove: Scan,
     recolor: Filter,
+    replace:Replace
   };
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-rows-3 xl:grid-cols-3 gap-5">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-rows-2 xl:grid-cols-3 gap-5">
       {images?.map((i) => {
         const prom = Object.keys(i.transformation!);
         const typePrompt: string[] = prom.filter((t) =>

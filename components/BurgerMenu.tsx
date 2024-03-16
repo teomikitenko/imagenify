@@ -7,11 +7,11 @@ import Scan from "@/public/icons/scan.svg";
 import Filter from "@/public/icons/filter.svg";
 import Logo from "@/public/images/logo-text.svg";
 import Profile from "@/public/icons/profile.svg";
+import Replace from "@/public/icons/replace.svg";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
 import clsx from "clsx";
-
 
 const BurgerMenu = ({
   setOpen,
@@ -27,6 +27,7 @@ const BurgerMenu = ({
     { title: "Generative Fill", href: "/fill", img: Stars },
     { title: "Object Remove", href: "/remove", img: Scan },
     { title: "Object Recolor", href: "/recolor", img: Filter },
+    { title: "Object Replace", href: "/replace", img: Replace },
   ];
 
   const animateOpen = clsx({

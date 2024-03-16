@@ -27,7 +27,7 @@ export const getSearchCountPages = async (search?: string) => {
     .from("transformations")
     .select("*")
     .ilike("title", `%${search ? search : ""}%`)
-    .select("*");
+    .select("*")
   return data?.length;
 };
 export const getAllTransformations = async (obj: {
@@ -49,7 +49,8 @@ export const getAllTransformations = async (obj: {
     .select("*")
     .ilike("title", `%${obj.search ? obj.search : ""}%`)
     .range(from, to)
-    .select("*");
+    .select("*")
+    .order('created_at', { ascending: false })
   return transformations;
 };
 export const getTransformationById = async (id: string) => {
@@ -65,6 +66,7 @@ export const getDataByCreater = async (creater: string) => {
     .from("transformations")
     .select()
     .eq("creater", creater)
-    .select();
+    .select('*')
+    .order('created_at', { ascending: false })
   return data;
 };
