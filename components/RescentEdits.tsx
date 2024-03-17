@@ -27,7 +27,6 @@ const RescentEdits = ({
         </div>
       </div>
       <Suspense fallback={<LoadingImagesGallery />}>
-        {/* @ts-expect-error Server Component */}
         <ImagesGalleryWrapper count={count} page={page} search={search} />
       </Suspense>
     </div>

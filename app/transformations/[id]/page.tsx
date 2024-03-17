@@ -110,7 +110,6 @@ const Transformation = async ({ params }: { params: { id: string } }) => {
         <div className="flex flex-col sm:flex-row sm:gap-8 gap-2">{readPrompt()}</div>
         <div className="h-[1px] mt-2 sm:mt-7 border-slate-200 w-full border-t-2"></div>
       </div>
-      {/* @ts-expect-error Server Component */}
       <TransformationView
         original={transformation![0].originalUrl!}
         transformed={transformation![0].transformationUrl!}
