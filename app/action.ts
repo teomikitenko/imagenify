@@ -8,6 +8,5 @@ export async function save(obj:any) {
      } catch (error) {
         throw error
      }
-
      revalidatePath('/')
 }
