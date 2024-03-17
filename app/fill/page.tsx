@@ -1,6 +1,6 @@
 import TransformedForm from "@/components/TransformedForm";
 
-export const Fill = () => {
+const Fill = () => {
   return (
     <div className="flex  flex-col gap-8">
       <div>
