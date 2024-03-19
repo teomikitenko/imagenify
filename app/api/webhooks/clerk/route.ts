@@ -1,6 +1,6 @@
 import { Webhook } from 'svix'
 import { headers } from 'next/headers'
-import { WebhookEvent,UserWebhookEvent,UserJSON, User } from '@clerk/nextjs/server'
+import { WebhookEvent,UserWebhookEvent } from '@clerk/nextjs/server'
 import { addUser } from '@/lib/supabase'
  
 export async function POST(req: Request) {
@@ -25,23 +25,23 @@ export async function POST(req: Request) {
   const body = JSON.stringify(payload);
   const wh = new Webhook(WEBHOOK_SECRET);
  
-  let evt: WebhookEvent
+  let evt:UserWebhookEvent
   try {
     evt = wh.verify(body, {
       "svix-id": svix_id,
       "svix-timestamp": svix_timestamp,
       "svix-signature": svix_signature,
-    }) as  WebhookEvent
+    }) as UserWebhookEvent
   } catch (err) {
     console.error('Error verifying webhook:', err);
     return new Response('Error occured', {
       status: 400
     })
   }
-  const {data} = evt;
-/*   const userObject = {
-    name:data. + " " + evt.last_name,credits:'15'
-  } */
+  const data = evt.data.object 
+  /*  const userObject = {
+    name:data. + " " + last_name,credits:'15'
+  }  */
 console.log(data)
    /* await addUser(userObject) */
   return new Response('', { status: 200 })
