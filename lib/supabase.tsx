@@ -2,7 +2,7 @@
 
 import { createClient } from "@supabase/supabase-js";
 import { Database } from "@/types/supabase";
-import type { TransformData } from "@/types/type";
+import type { TransformData,User } from "@/types/type";
 
 const supabase = createClient<Database>(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -70,3 +70,14 @@ export const getDataByCreater = async (creater: string) => {
     .order('created_at', { ascending: false })
   return data;
 };
+export const addUser = async(user:User)=>{
+  const { error } = await supabase
+  .from('users')
+  .insert(user)
+}
+export const updateUserCredits = async(id:string,credits:string)=>{
+  const { error } = await supabase
+  .from('users')
+  .update({ credits: credits })
+  .eq('id',id )
+}

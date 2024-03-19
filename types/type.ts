@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 import type { Database } from "./supabase";
 
+
 export type ThemeObject = {
   theme: string;
   setTheme: Dispatch<SetStateAction<string>>;
@@ -54,3 +55,4 @@ export type Transformations = {
     recolor: any;
     replace:any
   };
+  export type User = Database['public']['Tables']['users']['Insert']
