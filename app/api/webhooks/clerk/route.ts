@@ -42,7 +42,11 @@ export async function POST(req: Request) {
   const userObject = {
     name:evt.first_name + " " + evt.last_name,credits:'15'
   }
-  console.log(userObject)
+  console.log({
+    obj:evt,
+    first_name:evt.first_name,
+    last_name:evt.last_name
+  })
    /* await addUser(userObject) */
   return new Response('', { status: 200 })
 }
