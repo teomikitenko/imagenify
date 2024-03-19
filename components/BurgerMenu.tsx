@@ -8,10 +8,12 @@ import Filter from "@/public/icons/filter.svg";
 import Logo from "@/public/images/logo-text.svg";
 import Profile from "@/public/icons/profile.svg";
 import Replace from "@/public/icons/replace.svg";
+import Login from "@/public/icons/login.svg";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
 import clsx from "clsx";
+import { SignedIn, SignedOut, UserButton, SignInButton } from "@clerk/nextjs";
 
 const BurgerMenu = ({
   setOpen,
@@ -82,19 +84,36 @@ const BurgerMenu = ({
                     </Link>
                   ))}
                 </div>
-                <Link href={"/profile"}>
+                <SignedIn>
+                  <Link href={"/profile"}>
+                    <div className="flex gap-3 mb-3">
+                      <Image
+                        src={Profile}
+                        width={22}
+                        height={22}
+                        alt="link-icon"
+                      />
+                      <p className="font-semibold text-slate-700 dark:text-slate-100">
+                        Profile
+                      </p>
+                    </div>
+                  </Link>
+                </SignedIn>
+                <SignedOut>
+                  <SignInButton>
                   <div className="flex gap-3 mb-3">
-                    <Image
-                      src={Profile}
-                      width={22}
-                      height={22}
-                      alt="link-icon"
-                    />
-                    <p className="font-semibold text-slate-700 dark:text-slate-100">
-                      Profile
-                    </p>
-                  </div>
-                </Link>
+                      <Image
+                        src={Login}
+                        width={22}
+                        height={22}
+                        alt="link-icon"
+                      />
+                      <p className="font-semibold text-slate-700 dark:text-slate-100">
+                        Login
+                      </p>
+                    </div>
+                  </SignInButton>
+                </SignedOut>
               </div>
             </div>
           </div>

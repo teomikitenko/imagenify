@@ -17,7 +17,7 @@ const LeftPanel = () => {
     { title: "Generative Fill", href: "/fill", img: Stars },
     { title: "Object Remove", href: "/remove", img: Scan },
     { title: "Object Recolor", href: "/recolor", img: Filter },
-    { title: "Object Replace", href: "/replace", img: Replace }
+    { title: "Object Replace", href: "/replace", img: Replace },
   ];
   return (
     <div className="lg:block hidden max-w-[330px] pl-8 w-[30%] border relative dark:bg-slate-800 dark:border-slate-800">

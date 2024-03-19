@@ -2,7 +2,7 @@
 import Logo from "@/public/images/logo-text.svg";
 import Image from "next/image";
 import BurgerMenuIcon from "@/public/icons/menu.svg";
-import { SignedIn, UserButton } from "@clerk/nextjs";
+import { SignedIn,UserButton} from "@clerk/nextjs";
 import { useState } from "react";
 import BurgerMenu from "./BurgerMenu";
 import { createPortal } from "react-dom";
