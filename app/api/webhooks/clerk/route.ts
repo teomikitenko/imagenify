@@ -1,15 +1,14 @@
 import { Webhook } from 'svix'
 import { headers } from 'next/headers'
-import { WebhookEvent,UserWebhookEvent } from '@clerk/nextjs/server'
+import { WebhookEvent } from '@clerk/nextjs/server'
 import { addUser } from '@/lib/supabase'
+import type { User } from '@/types/type'
  
 export async function POST(req: Request) {
   const WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SECRET
- 
   if (!WEBHOOK_SECRET) {
     throw new Error('Please add WEBHOOK_SECRET from Clerk Dashboard to .env or .env.local')
   }
- 
   const headerPayload = headers();
   const svix_id = headerPayload.get("svix-id");
   const svix_timestamp = headerPayload.get("svix-timestamp");
@@ -20,30 +19,32 @@ export async function POST(req: Request) {
       status: 400
     })
   }
- 
   const payload = await req.json()
   const body = JSON.stringify(payload);
   const wh = new Webhook(WEBHOOK_SECRET);
  
-  let evt:UserWebhookEvent
+  let evt:WebhookEvent 
   try {
     evt = wh.verify(body, {
       "svix-id": svix_id,
       "svix-timestamp": svix_timestamp,
       "svix-signature": svix_signature,
-    }) as UserWebhookEvent
+    }) as WebhookEvent 
   } catch (err) {
     console.error('Error verifying webhook:', err);
     return new Response('Error occured', {
       status: 400
     })
   }
-  const data = evt.data.object 
-  /*  const userObject = {
-    name:data. + " " + last_name,credits:'15'
-  }  */
-console.log(data)
-   /* await addUser(userObject) */
-  return new Response('', { status: 200 })
+  switch (evt.type) {
+    case 'user.created':
+      const firstName = evt.data.first_name
+      const lastName = evt.data.last_name
+      const userObject={
+        name:firstName + " " + lastName,credits:'15'
+       }
+      await addUser(userObject as User)
+  } 
+  return new Response('all ok', { status: 200 })
 }
  
