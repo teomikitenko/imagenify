@@ -40,7 +40,7 @@ export async function POST(req: Request) {
   }
   const {first_name,last_name} = evt;
   const userObject = {
-    name:first_name + " " + last_name,credits:'15'
+    name:evt.first_name + " " + evt.last_name,credits:'15'
   }
   console.log(userObject)
    /* await addUser(userObject) */
