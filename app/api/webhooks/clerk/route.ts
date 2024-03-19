@@ -36,8 +36,7 @@ export async function POST(req: Request) {
       status: 400
     })
   }
-  switch (evt.type) {
-    case 'user.created':
+  if(evt.type === 'user.created') {
       const firstName = evt.data.first_name
       const lastName = evt.data.last_name
       const userObject={
