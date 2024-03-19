@@ -25,26 +25,24 @@ export async function POST(req: Request) {
   const body = JSON.stringify(payload);
   const wh = new Webhook(WEBHOOK_SECRET);
  
-  let evt: UserJSON
+  let evt: WebhookEvent
   try {
     evt = wh.verify(body, {
       "svix-id": svix_id,
       "svix-timestamp": svix_timestamp,
       "svix-signature": svix_signature,
-    }) as  UserJSON
+    }) as  WebhookEvent
   } catch (err) {
     console.error('Error verifying webhook:', err);
     return new Response('Error occured', {
       status: 400
     })
   }
-  const {first_name,last_name} = evt;
-  const userObject = {
-    name:evt.first_name + " " + evt.last_name,credits:'15'
-  }
-  console.log({
-    obj:Object.keys(evt)
-  })
+  const {data} = evt;
+/*   const userObject = {
+    name:data. + " " + evt.last_name,credits:'15'
+  } */
+console.log(data)
    /* await addUser(userObject) */
   return new Response('', { status: 200 })
 }
