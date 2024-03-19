@@ -43,9 +43,7 @@ export async function POST(req: Request) {
     name:evt.first_name + " " + evt.last_name,credits:'15'
   }
   console.log({
-    obj:evt,
-    first_name:evt.first_name,
-    last_name:evt.last_name
+    obj:Object.keys(evt)
   })
    /* await addUser(userObject) */
   return new Response('', { status: 200 })
