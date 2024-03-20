@@ -6,6 +6,7 @@ import Filter from "@/public/icons/filter.svg";
 import Logo from "@/public/images/logo-text.svg";
 import Profile from "@/public/icons/profile.svg";
 import Replace from "@/public/icons/replace.svg";
+import Buy from "@/public/icons/bag.svg";
 import Image from "next/image";
 import Link from "next/link";
 import { SignedIn, SignedOut, UserButton, SignInButton } from "@clerk/nextjs";
@@ -18,6 +19,7 @@ const LeftPanel = () => {
     { title: "Object Remove", href: "/remove", img: Scan },
     { title: "Object Recolor", href: "/recolor", img: Filter },
     { title: "Object Replace", href: "/replace", img: Replace },
+    { title: "Buy Credits", href: "/credits", img: Buy },
   ];
   return (
     <div className="lg:block hidden max-w-[330px] pl-8 w-[30%] border relative dark:bg-slate-800 dark:border-slate-800">

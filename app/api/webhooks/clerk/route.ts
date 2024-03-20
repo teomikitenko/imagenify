@@ -42,7 +42,7 @@ export async function POST(req: Request) {
       const userObject={
         name:firstName + " " + lastName,credits:'15'
        }
-      await addUser(userObject as User)
+  await addUser(userObject as User)
   } 
   return new Response('all ok', { status: 200 })
 }

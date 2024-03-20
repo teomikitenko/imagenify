@@ -2,8 +2,8 @@
 import { createContext, useState, useEffect } from "react";
 import { ThemeObject } from "@/types/type";
 import { ClerkProvider } from "@clerk/nextjs";
-import { dark } from "@clerk/themes";
 
+import { dark } from "@clerk/themes";
 
 export const ThemeContext = createContext<ThemeObject | undefined>(undefined);
 
@@ -15,6 +15,7 @@ const ThemeProvider = ({
   currentTheme: string;
 }) => {
   const [theme, setTheme] = useState(currentTheme);
+
   useEffect(() => {
     if (theme) {
       document.cookie = `theme=${theme};max-age=3600`;

@@ -56,3 +56,17 @@ export type Transformations = {
     replace:any
   };
   export type User = Database['public']['Tables']['users']['Insert']
+
+  export type PurchaseObject = {
+    price:number,
+    name:string | null | undefined,
+    plan_name:string
+  }
+ export type CardDetails = {
+    planName:string,
+    planPrice:number,
+    creditsAmount: number,
+    planDetail:[string,boolean][]
+}
+
+ export type CardType = CardDetails[] 
