@@ -33,7 +33,8 @@ const session = await stripe.checkout.sessions.create({
    mode: 'payment',
    metadata:{
     user:data.name!,
-    credits:data.price
+    credits:data.price,
+    userId:data.userId!
    }
  });
  redirect(session.url!)

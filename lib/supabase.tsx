@@ -78,6 +78,7 @@ export const addUser = async(user:User)=>{
 export const updateUserCredits = async(id:string,credits:string)=>{
   const { error } = await supabase
   .from('users')
+
   .update({ credits: credits })
-  .eq('id',id )
+  
 }

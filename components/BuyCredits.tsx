@@ -55,6 +55,7 @@ const BuyCreditsCards = async ({ plansCard }: { plansCard: CardType }) => {
                     ? user?.firstName + " " + user?.lastName
                     : user?.firstName,
                   plan_name: c.planName,
+                  userId:user?.id
                 });
               }}
             >

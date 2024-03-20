@@ -39,8 +39,11 @@ export async function POST(req: Request) {
   if(evt.type === 'user.created') {
       const firstName = evt.data.first_name
       const lastName = evt.data.last_name
+      const id = evt.data.id
       const userObject={
-        name:firstName + " " + lastName,credits:'15'
+        name:firstName + " " + lastName,
+        credits:'15',
+        id:id
        }
   await addUser(userObject as User)
   } 
