@@ -75,10 +75,14 @@ export const addUser = async(user:User)=>{
   .from('users')
   .insert(user)
 }
-export const updateUserCredits = async(id:string,credits:string)=>{
+export const updateUserCredits = async(id:string,credits:number)=>{
   const { error } = await supabase
   .from('users')
-
   .update({ credits: credits })
   
+}
+
+export const decrementCredits=async(id:string)=>{
+  const { data, error } = await supabase
+  .rpc('decrement', {row_id: id })
 }

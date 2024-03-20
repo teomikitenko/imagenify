@@ -13,7 +13,7 @@ export async function POST(request:Request) {
       switch (event.type) {
         case 'checkout.session.completed':
           const checkoutSessionCompleted = event.data.object;
-          console.log({chekdata:checkoutSessionCompleted})
+          
           break;
         default:
           console.log(`Unhandled event type ${event.type}`);
