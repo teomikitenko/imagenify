@@ -13,7 +13,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
 import clsx from "clsx";
-import { SignedIn, SignedOut, UserButton, SignInButton } from "@clerk/nextjs";
+import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
+import Buy from "@/public/icons/bag.svg";
 
 const BurgerMenu = ({
   setOpen,
@@ -30,6 +31,7 @@ const BurgerMenu = ({
     { title: "Object Remove", href: "/remove", img: Scan },
     { title: "Object Recolor", href: "/recolor", img: Filter },
     { title: "Object Replace", href: "/replace", img: Replace },
+    { title: "Buy Credits", href: "/credits", img: Buy },
   ];
 
   const animateOpen = clsx({

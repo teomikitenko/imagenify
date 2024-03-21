@@ -28,16 +28,23 @@ import {
 } from "@/components/ui/select";
 import clsx from "clsx";
 import { decrementCredits } from "@/lib/supabase";
-import { useToast } from "@/components/ui/use-toast"
+import { useToast } from "@/components/ui/use-toast";
+import { useRouter } from "next/navigation";
 
-
-const TransformedForm = ({ type }: { type: keyof Transformations }) => {
+const TransformedForm = ({
+  type,
+  credits,
+}: {
+  type: keyof Transformations;
+  credits: number | null;
+}) => {
   const [id, setid] = useState<string | undefined>(undefined);
   const [transformation, setTransformation] = useState<TransformationData>();
   const [active, setActive] = useState(true);
   const [apply, setApply] = useState(false);
   const { user } = useUser();
-  const {toast} = useToast()
+  const { toast } = useToast();
+  const router = useRouter();
 
   const borderOriginal = clsx({
     "dark:border-gray-900 dark:border-gray-600": active,
@@ -113,6 +120,25 @@ const TransformedForm = ({ type }: { type: keyof Transformations }) => {
   useEffect(() => {
     if (apply) constructPrompt();
   }, [apply]);
+  const applyHandler = () => {
+    if (credits === 0) {
+      toast({
+        variant: "destructive",
+        title: "Sorry,not enough credits",
+        description: "Please top up your account",
+      });
+      router.push("/credits", { scroll: true });
+    } else {
+      toast({
+        variant: "default",
+        title: "Image uploaded succefully!",
+        description: "1 credit has been deducted from you account",
+      });
+      setApply(true);
+      decrementCredits(user?.id!);
+    }
+  };
+
   const constructPrompt = () => {
     if (type === "replace") {
       setTransformation({
@@ -318,15 +344,7 @@ const TransformedForm = ({ type }: { type: keyof Transformations }) => {
             variant="gradient"
             size="custom"
             disabled={active}
-            onClick={() =>{
-              toast({
-                variant:'default',
-                title: "Image uploaded succefully!",
-                description: "1 credit has been deducted from you account",
-              })
-              setApply(true)
-              decrementCredits(user?.id!)
-            }}
+            onClick={applyHandler}
             type="button"
           >
             <p className="text-slate-50 font-semibold text-sm md:text-base">
@@ -348,5 +366,4 @@ const TransformedForm = ({ type }: { type: keyof Transformations }) => {
     </Form>
   );
 };
-
 export default TransformedForm;

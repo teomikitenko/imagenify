@@ -1,5 +1,5 @@
 import { getAllTransformations } from "@/lib/supabase";
-import ImagesGallery from "./ImagesGallery";
+import ImagesGallery from "../ImagesGallery";
 import Caret from "@/public/icons/caret-down.svg";
 import Link from "next/link";
 import Image from "next/image";

@@ -61,13 +61,14 @@ export type Transformations = {
   export type PurchaseObject = {
     price:number,
     name:string | null | undefined,
+    credits:number,
     plan_name:string,
     userId:string|undefined
   }
  export type CardDetails = {
     planName:string,
     planPrice:number,
-    creditsAmount: number,
+    credits: number,
     planDetail:[string,boolean][]
 }
 

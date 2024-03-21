@@ -6,7 +6,7 @@ const Credits = () => {
     {
       planName: "Free",
       planPrice: 0,
-      creditsAmount: 10,
+      credits: 10,
       planDetail: [
         ["10 Credits", true],
         ["Basic Access to Services", true],
@@ -17,7 +17,7 @@ const Credits = () => {
     {
       planName: "Pro Package",
       planPrice: 59,
-      creditsAmount: 100,
+      credits: 100,
       planDetail: [
         ["100 Credits", true],
         ["Full Access to Services", true],
@@ -28,7 +28,7 @@ const Credits = () => {
     {
       planName: "Premium Package",
       planPrice: 499,
-      creditsAmount: 499,
+      credits: 499,
       planDetail: [
         ["10 Credits", true],
         ["Full Access to Services", true],

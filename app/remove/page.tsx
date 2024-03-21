@@ -1,4 +1,6 @@
-import TransformedForm from "@/components/TransformedForm";
+import { LoadingFormTwoInput } from "@/components/Loading";
+import TransformedFormWrapper from "@/components/wrappers/TransformedFormWrapper";
+import { Suspense } from "react";
 
 const Remove = () => {
   return (
@@ -11,7 +13,9 @@ const Remove = () => {
           Identify and eliminate objects from images 
         </h3>
       </div>
-      <TransformedForm key={'remove'} type="remove" />
+      <Suspense fallback={<LoadingFormTwoInput/>}>
+          <TransformedFormWrapper type='remove'/>
+        </Suspense>
     </div>
   );
 };

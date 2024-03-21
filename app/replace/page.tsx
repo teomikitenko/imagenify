@@ -1,4 +1,6 @@
-import TransformedForm from "@/components/TransformedForm"
+import { LoadingFormTwoInput } from "@/components/Loading"
+import TransformedFormWrapper from "@/components/wrappers/TransformedFormWrapper"
+import { Suspense } from "react"
 
 const Replace = () => {
   return (
@@ -11,7 +13,9 @@ const Replace = () => {
       Transform images with seamless object replacement
       </h3>
     </div>
-    <TransformedForm key={'replace'} type="replace"/>
+    <Suspense fallback={<LoadingFormTwoInput/>}>
+          <TransformedFormWrapper type='replace'/>
+        </Suspense> 
   </div>
   )
 }

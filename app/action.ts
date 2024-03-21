@@ -18,7 +18,7 @@ export async function save(obj:any) {
 export const onCheckout = async(data:PurchaseObject)=>{
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
 const session = await stripe.checkout.sessions.create({
-   success_url: process.env.NEXT_PUBLIC_SERVER_URL,
+   success_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/profile?credits=${data.credits}`,
    line_items: [
      {
        price_data:{
@@ -34,7 +34,7 @@ const session = await stripe.checkout.sessions.create({
    mode: 'payment',
    metadata:{
     user:data.name!,
-    credits:data.price,
+    credits:data.credits,
     userId:data.userId!
    } 
  });

@@ -29,7 +29,7 @@ const BuyCreditsCards = async ({ plansCard }: { plansCard: CardType }) => {
               <CardTitle className="text-center font-semibold text-indigo-600">{c.planName}</CardTitle>
               <CardTitle className="text-center text-blue-950 text-4xl dark:text-slate-400">{c.planPrice + "$"}</CardTitle>
               <CardDescription className="text-center">
-                {c.creditsAmount + " " + "Credits"}
+                {c.credits + " " + "Credits"}
               </CardDescription>
             </div>
           </CardHeader>
@@ -51,6 +51,7 @@ const BuyCreditsCards = async ({ plansCard }: { plansCard: CardType }) => {
                 "use server";
                 await onCheckout({
                   price: c.planPrice,
+                  credits:c.credits,
                   name: user?.lastName
                     ? user?.firstName + " " + user?.lastName
                     : user?.firstName,

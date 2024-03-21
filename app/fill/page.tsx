@@ -1,4 +1,6 @@
-import TransformedForm from "@/components/TransformedForm";
+import { LoadingFormTwoInput } from "@/components/Loading";
+import TransformedFormWrapper from "@/components/wrappers/TransformedFormWrapper";
+import { Suspense } from "react";
 
 const Fill = () => {
   return (
@@ -11,7 +13,9 @@ const Fill = () => {
           Enhance an image's dimensions using AI outpainting
         </h3>
       </div>
-      <TransformedForm key={'aspectRatio'} type="aspectRatio"/>
+      <Suspense fallback={<LoadingFormTwoInput/>}>
+          <TransformedFormWrapper type='aspectRatio'/>
+        </Suspense>
     </div>
   );
 };

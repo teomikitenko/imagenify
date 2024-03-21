@@ -1,6 +1,6 @@
 import SearchIcon from "@/public/icons/search.svg";
 import Image from "next/image";
-import ImagesGalleryWrapper from "./ImagesGalleryWrapper";
+import ImagesGalleryWrapper from "./wrappers/ImagesGalleryWrapper";
 import { Suspense } from "react";
 import { LoadingImagesGallery } from "./Loading";
 import SearchInput from "./SearchInput";
