@@ -1,4 +1,4 @@
-import type { ImagesType, DictionaryPic } from "@/types/type";
+import type { ImagesType, DictionaryPic} from "@/types/type";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,7 +8,8 @@ import Scan from "@/public/icons/scan.svg";
 import Filter from "@/public/icons/filter.svg";
 import Replace from "@/public/icons/replace.svg";
 
-const ImagesGallery = ({ images }: { images: ImagesType[] }) => {
+
+const ImagesGallery = ({ images}: {images?: ImagesType[] }) => {
   const pic = {
     restore: Pic,
     aspectRatio: Stars,

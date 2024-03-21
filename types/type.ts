@@ -48,6 +48,7 @@ export type Transformations = {
     transformations:[string]
   }
   export type ImagesType = Database['public']['Tables']['transformations']['Row']
+  
   export type DictionaryPic = {
     restore: any;
     aspectRatio: any;

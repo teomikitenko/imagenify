@@ -27,6 +27,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import clsx from "clsx";
+import { decrementCredits } from "@/lib/supabase";
+import { useToast } from "@/components/ui/use-toast"
+
 
 const TransformedForm = ({ type }: { type: keyof Transformations }) => {
   const [id, setid] = useState<string | undefined>(undefined);
@@ -34,6 +37,7 @@ const TransformedForm = ({ type }: { type: keyof Transformations }) => {
   const [active, setActive] = useState(true);
   const [apply, setApply] = useState(false);
   const { user } = useUser();
+  const {toast} = useToast()
 
   const borderOriginal = clsx({
     "dark:border-gray-900 dark:border-gray-600": active,
@@ -314,7 +318,15 @@ const TransformedForm = ({ type }: { type: keyof Transformations }) => {
             variant="gradient"
             size="custom"
             disabled={active}
-            onClick={() => setApply(true)}
+            onClick={() =>{
+              toast({
+                variant:'default',
+                title: "Image uploaded succefully!",
+                description: "1 credit has been deducted from you account",
+              })
+              setApply(true)
+              decrementCredits(user?.id!)
+            }}
             type="button"
           >
             <p className="text-slate-50 font-semibold text-sm md:text-base">

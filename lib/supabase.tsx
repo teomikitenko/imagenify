@@ -1,5 +1,6 @@
 "use server";
 
+import { QueryResult, QueryData, QueryError } from '@supabase/supabase-js'
 import { createClient } from "@supabase/supabase-js";
 import { Database } from "@/types/supabase";
 import type { TransformData,User } from "@/types/type";
@@ -61,7 +62,7 @@ export const getTransformationById = async (id: string) => {
     .select();
   return data;
 };
-export const getDataByCreater = async (creater: string) => {
+/* export const getDataByCreater = async (creater: string) => {
   const { data, error } = await supabase
     .from("transformations")
     .select()
@@ -69,7 +70,24 @@ export const getDataByCreater = async (creater: string) => {
     .select('*')
     .order('created_at', { ascending: false })
   return data;
-};
+}; */
+export const getDataForProfile = async(id:string)=>{
+  const { data, error } = await supabase
+  .from('users')
+  .select()
+  .eq('user_id',id)
+  .select(`user_id,credits,
+  transformations(
+    *
+  )
+  `)
+  .order('created_at',{referencedTable:'transformations',ascending: false})
+  return data
+}
+export type DataProfile = QueryData<typeof getDataForProfile>;
+
+
+
 export const addUser = async(user:User)=>{
   const { error } = await supabase
   .from('users')

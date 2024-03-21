@@ -6,6 +6,7 @@ import ThemeProvider from "@/components/Themes/ThemeProvider";
 import { cookies } from "next/headers";
 import clsx from "clsx";
 import TopPanel from "@/components/TopPanel";
+import { Toaster } from "@/components/ui/toaster";
 
 const ibm = IBM_Plex_Sans({
   subsets: ["latin"],
@@ -37,6 +38,7 @@ export default function RootLayout({
             <main className="w-full dark:bg-slate-800 px-5 md:px-9 py-9 max-w-[1620px] 2xl:m-auto ">
               {children}
             </main>
+            <Toaster/>
           </div>
         </body>
       </html>
