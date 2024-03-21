@@ -86,3 +86,7 @@ export const decrementCredits=async(id:string)=>{
   const { data, error } = await supabase
   .rpc('decrement', {row_id: id })
 }
+export const updateCredits=async(count:number,id:string)=>{
+  const { data, error } = await supabase
+  .rpc('add_credits', {count:count,row_id: id })
+}

@@ -17,7 +17,6 @@ import { currentUser } from "@clerk/nextjs";
 
 const BuyCreditsCards = async ({ plansCard }: { plansCard: CardType }) => {
   const user = await currentUser();
-  console.log(user)
   return (
     <div className="flex gap-2">
       {plansCard.map((c) => (

@@ -42,7 +42,7 @@ export async function POST(req: Request) {
       const id = evt.data.id
       const userObject={
         name:firstName + " " + lastName,
-        credits:15,
+        credits: 10,
         user_id:id
        }
   await addUser(userObject as User)

@@ -1,3 +1,4 @@
+import { updateCredits } from "@/lib/supabase";
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET
 
@@ -13,7 +14,7 @@ export async function POST(request:Request) {
       switch (event.type) {
         case 'checkout.session.completed':
           const checkoutSessionCompleted = event.data.object;
-          
+          console.log(checkoutSessionCompleted)
           break;
         default:
           console.log(`Unhandled event type ${event.type}`);
