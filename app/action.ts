@@ -3,7 +3,8 @@ import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache'
 import { addData } from "@/lib/supabase"
 import Stripe from "stripe";
-import { PurchaseObject } from '@/types/type';
+import { PurchaseObject} from '@/types/type';
+
 
 export async function save(obj:any) {
      try {
@@ -35,7 +36,8 @@ const session = await stripe.checkout.sessions.create({
     user:data.name!,
     credits:data.price,
     userId:data.userId!
-   }
+   } 
  });
  redirect(session.url!)
 }
+

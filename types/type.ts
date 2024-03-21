@@ -71,3 +71,5 @@ export type Transformations = {
 }
 
  export type CardType = CardDetails[] 
+
+
