@@ -18,7 +18,7 @@ import { currentUser } from "@clerk/nextjs";
 const BuyCreditsCards = async ({ plansCard }: { plansCard: CardType }) => {
   const user = await currentUser();
   return (
-    <div className="flex gap-2">
+    <div className="grid grid-rows-3 gap-3 grid-cols-1 sm:gap-6 sm:grid-rows-2 sm:grid-cols-2 lg:gap-4 xl:grid-rows-1 xl:grid-cols-3 xl:gap-4">
       {plansCard.map((c) => (
         <Card key={c.planName}>
           <CardHeader>
@@ -26,8 +26,12 @@ const BuyCreditsCards = async ({ plansCard }: { plansCard: CardType }) => {
               <div className="flex justify-center">
                 <Image src={PlanIcon} width={50} height={50} alt="plan" />
               </div>
-              <CardTitle className="text-center font-semibold text-indigo-600">{c.planName}</CardTitle>
-              <CardTitle className="text-center text-blue-950 text-4xl dark:text-slate-400">{c.planPrice + "$"}</CardTitle>
+              <CardTitle className="text-center font-semibold text-indigo-600">
+                {c.planName}
+              </CardTitle>
+              <CardTitle className="text-center text-blue-950 text-4xl dark:text-slate-400">
+                {c.planPrice + "$"}
+              </CardTitle>
               <CardDescription className="text-center">
                 {c.credits + " " + "Credits"}
               </CardDescription>
@@ -46,22 +50,31 @@ const BuyCreditsCards = async ({ plansCard }: { plansCard: CardType }) => {
             ))}
           </CardContent>
           <CardFooter className="w-full">
-            <form className="w-full"
+            <form
+              className="w-full"
               action={async () => {
                 "use server";
                 await onCheckout({
                   price: c.planPrice,
-                  credits:c.credits,
+                  credits: c.credits,
                   name: user?.lastName
                     ? user?.firstName + " " + user?.lastName
                     : user?.firstName,
                   plan_name: c.planName,
-                  userId:user?.id
+                  userId: user?.id,
                 });
               }}
             >
-              <Button className={`${c.planName === "Free"?'bg-slate-100':'bg-purple-gradient'} rounded-3xl w-full`}>
-                <p className={`${c.planName === "Free"?'text-indigo-600':'text-slate-200'}`} >
+              <Button
+                className={`${
+                  c.planName === "Free" ? "bg-slate-100" : "bg-purple-gradient"
+                } rounded-3xl w-full`}
+              >
+                <p
+                  className={`${
+                    c.planName === "Free" ? "text-indigo-600" : "text-slate-200"
+                  }`}
+                >
                   {c.planName === "Free" ? "Free Consumable" : "Buy Credit"}
                 </p>
               </Button>
