@@ -347,9 +347,14 @@ const TransformedForm = ({
             onClick={applyHandler}
             type="button"
           >
-            <p className="text-slate-50 font-semibold text-sm md:text-base">
-              Apply transformation
-            </p>
+            <div className="flex gap-1">
+              <p className=" text-slate-50 font-semibold text-sm md:text-base">
+                Apply
+              </p>
+              <p className="hidden sm:inline text-slate-50 font-semibold text-sm md:text-base">
+                transformation
+              </p>
+            </div>
           </Button>
           <Button
             variant="gradient"
@@ -357,9 +362,14 @@ const TransformedForm = ({
             size="custom"
             type="submit"
           >
-            <p className="text-slate-50 font-semibold text-sm md:text-base">
-              Save Image
-            </p>
+            <div className="flex gap-1">
+              <p className="text-slate-50 font-semibold text-sm md:text-base">
+                Save
+              </p>
+              <p className="hidden sm:inline text-slate-50 font-semibold text-sm md:text-base">
+                Image
+              </p>
+            </div>
           </Button>
         </div>
       </form>
