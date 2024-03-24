@@ -4,7 +4,7 @@ import { Skeleton } from "./ui/skeleton";
 
 export const LoadingImagesGallery = () => {
   return (
-    <div className="grid grid-cols-3 grid-rows-3 gap-5">
+    <div className="responsive-gallery">
       {new Array(6).fill("1").map((l, index) => (
         <Skeleton key={index} className="h-56 w-full rounded-xl" />
       ))}
@@ -25,19 +25,20 @@ export const LoadingProfile = () => {
     </>
   );
 };
-export const LoadingFormOneInput=()=>{
-  return(
-  <div className="w-full space-y-12">
-    <Skeleton className="w-full rounded-2xl p-7"/>
-  </div>
-  )
-}
-export const LoadingFormTwoInput=()=>{
+export const LoadingFormOneInput = () => {
   return (
-    <div className="flex flex-col space-y-12 w-full gap-4">
-      <Skeleton className="w-full rounded-2xl p-7"/>
-      <Skeleton className="w-full rounded-2xl p-7"/>
-      <Skeleton className="min-h-80 rounded-2xl"/>
+    <div className="flex flex-col w-full space-y-12 mt-9">
+      <Skeleton className="w-full rounded-2xl p-7" />
+      <Skeleton className="min-h-80 rounded-2xl" />
     </div>
-  )
-}
+  );
+};
+export const LoadingFormTwoInput = () => {
+  return (
+    <div className="flex flex-col mt-9 space-y-12 w-full ">
+      <Skeleton className="w-full rounded-2xl p-7" />
+      <Skeleton className="w-full rounded-2xl p-7" />
+      <Skeleton className="min-h-80 rounded-2xl" />
+    </div>
+  );
+};

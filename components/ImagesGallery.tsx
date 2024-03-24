@@ -18,7 +18,7 @@ const ImagesGallery = ({ images}: {images?: ImagesType[] }) => {
     replace:Replace
   };
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-rows-2 xl:grid-cols-3 gap-5">
+    <div className="responsive-gallery">
       {images?.map((i) => {
         const prom = Object.keys(i.transformation!);
         const typePrompt: string[] = prom.filter((t) =>
