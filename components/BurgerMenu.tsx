@@ -50,14 +50,14 @@ const BurgerMenu = ({
     return () => clearTimeout(timer);
   }, [close]);
   return (
-    <div className="h-screen z-20 fixed top-0 w-full flex">
+    <div className="h-full z-20 fixed top-0 w-full flex">
       <div className="overflow-scroll relative w-full h-full">
         <div
           onClick={() => setClose(true)}
           className="bg-black opacity-85 h-full w-full z-10"
         ></div>
         <div
-          className={`absolute h-full ${animateOpen} z-50 top-0 w-[57%] sm:w-[35%] md:w-[28%] bg-slate-50 dark:bg-slate-800 `}
+          className={`absolute h-full ${animateOpen} z-50 top-0 w-[57%] sm:w-[35%] md:w-[28%] bg-slate-50 dark:bg-slate-800`}
         >
           <div className="flex py-4 px-6 relative h-full">
             <span
@@ -88,7 +88,7 @@ const BurgerMenu = ({
                 </div>
                 <SignedIn>
                   <Link href={"/profile"}>
-                    <div className="flex gap-3 sm:mb-3">
+                    <div className="flex gap-3 mb-3">
                       <Image
                         src={Profile}
                         width={22}
