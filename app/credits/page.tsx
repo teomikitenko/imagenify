@@ -39,7 +39,7 @@ const Credits = () => {
   ];
 
   return (
-    <div className="flex  flex-col gap-8">
+    <div className="flex h-full flex-col gap-8 ">
       <div>
         <h1 className="responsive-text pt-11 lg:pt-0 font-extrabold text-blue-950 mb-3 dark:text-slate-200">
           Buy Credits

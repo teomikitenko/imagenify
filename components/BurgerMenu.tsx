@@ -50,7 +50,7 @@ const BurgerMenu = ({
     return () => clearTimeout(timer);
   }, [close]);
   return (
-    <div className="h-full z-20 fixed top-0 w-full flex">
+    <div className="h-screen z-20 fixed top-0 w-full flex">
       <div className="overflow-scroll relative w-full h-full">
         <div
           onClick={() => setClose(true)}
@@ -68,7 +68,7 @@ const BurgerMenu = ({
             </span>
             <div className="flex flex-col h-full pt-3">
               <Image src={Logo} width={153} alt="logo" />
-              <div className="flex flex-col h-full gap-36">
+              <div className="flex flex-col h-full justify-between ">
                 <div className="mt-8 flex flex-col  gap-5">
                   {links.map((l) => (
                     <Link href={l.href}>
