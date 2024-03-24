@@ -54,10 +54,10 @@ const BurgerMenu = ({
       <div className="overflow-scroll relative w-full h-full">
         <div
           onClick={() => setClose(true)}
-          className="bg-black opacity-85 h-full w-full z-10"
+          className="bg-black opacity-85 h-full w-full z-10 "
         ></div>
         <div
-          className={`absolute h-full ${animateOpen} z-50 top-0 w-[57%] sm:w-[35%] md:w-[28%] bg-slate-50 dark:bg-slate-800`}
+          className={`absolute h-full ${animateOpen} z-50  top-0 w-[62%] sm:w-[39%] md:w-[30%] bg-slate-50 dark:bg-slate-800`}
         >
           <div className="flex py-4 px-6 relative h-full">
             <span
@@ -66,7 +66,7 @@ const BurgerMenu = ({
             >
               &#10005;
             </span>
-            <div className="flex flex-col h-[calc(100vh-15%)] pt-3">
+            <div className="flex flex-col h-[calc(100vh-10%)] pt-3">
               <Image src={Logo} width={153} alt="logo" />
               <div className="flex flex-col h-full justify-between ">
                 <div className="mt-8 flex flex-col  gap-5">
