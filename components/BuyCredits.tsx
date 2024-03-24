@@ -39,7 +39,7 @@ const BuyCreditsCards = async ({ plansCard }: { plansCard: CardType }) => {
           </CardHeader>
           <CardContent className="flex flex-col mt-3 gap-4">
             {c.planDetail.map((d) => (
-              <div className="flex gap-3">
+              <div key={d[0]} className="flex gap-3">
                 {d[1] ? (
                   <Image src={Check} width={24} height={24} alt="check" />
                 ) : (

@@ -32,13 +32,13 @@ export default function RootLayout({
     <ThemeProvider currentTheme={theme!}>
       <html lang="en" className={currentStyle}>
         <body className={ibm.className}>
-          <div className="w-full min-w-[355px]  flex flex-col lg:flex-row relative">
+          <div className="w-full min-w-[355px] flex flex-col lg:flex-row relative">
             <TopPanel />
             <LeftPanel />
-            <main className="w-full dark:bg-slate-800 px-5 md:px-9 py-9 max-w-[1620px] 2xl:m-auto ">
-              {children}
+            <main className="h-full w-full dark:bg-slate-800 px-5 md:px-9 py-9">
+              <div className="max-w-[1500px] m-auto">{children}</div>
             </main>
-            <Toaster/>
+            <Toaster />
           </div>
         </body>
       </html>
