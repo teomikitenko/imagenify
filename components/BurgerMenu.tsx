@@ -66,7 +66,7 @@ const BurgerMenu = ({
             >
               &#10005;
             </span>
-            <div className="flex flex-col h-[80%] pt-3">
+            <div className="flex flex-col h-full pt-3">
               <Image src={Logo} width={153} alt="logo" />
               <div className="flex flex-col h-full justify-between ">
                 <div className="mt-8 flex flex-col  gap-5">
